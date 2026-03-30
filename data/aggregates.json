@@ -1,0 +1,296 @@
+{
+  "metadata": {
+    "generated_at": "2026-03-25T20:53:23.668950+00:00",
+    "ats_files": 357,
+    "ticket_files": 12,
+    "ats_events": 14251082,
+    "ticket_events": 95593746
+  },
+  "all": {
+    "0": {
+      "avg_delay_min": 0,
+      "avg_headway_min": 4,
+      "avg_load_pct": 50,
+      "incident_count": 73450,
+      "validation_count": 47800038
+    },
+    "1": {
+      "avg_delay_min": 0,
+      "avg_headway_min": 4,
+      "avg_load_pct": 50,
+      "incident_count": 92881,
+      "validation_count": 0
+    },
+    "2": {
+      "avg_delay_min": 0,
+      "avg_headway_min": 4,
+      "avg_load_pct": 50,
+      "incident_count": 106051,
+      "validation_count": 0
+    },
+    "3": {
+      "avg_delay_min": 0,
+      "avg_headway_min": 4,
+      "avg_load_pct": 50,
+      "incident_count": 108439,
+      "validation_count": 0
+    },
+    "4": {
+      "avg_delay_min": 0,
+      "avg_headway_min": 4,
+      "avg_load_pct": 50,
+      "incident_count": 76780,
+      "validation_count": 0
+    },
+    "5": {
+      "avg_delay_min": 0,
+      "avg_headway_min": 4,
+      "avg_load_pct": 50,
+      "incident_count": 74068,
+      "validation_count": 0
+    },
+    "6": {
+      "avg_delay_min": 0,
+      "avg_headway_min": 4,
+      "avg_load_pct": 50,
+      "incident_count": 71188,
+      "validation_count": 0
+    },
+    "7": {
+      "avg_delay_min": 0,
+      "avg_headway_min": 4,
+      "avg_load_pct": 50,
+      "incident_count": 87138,
+      "validation_count": 0
+    },
+    "8": {
+      "avg_delay_min": 0,
+      "avg_headway_min": 4,
+      "avg_load_pct": 50,
+      "incident_count": 100687,
+      "validation_count": 0
+    },
+    "9": {
+      "avg_delay_min": 0,
+      "avg_headway_min": 4,
+      "avg_load_pct": 50,
+      "incident_count": 99801,
+      "validation_count": 0
+    },
+    "10": {
+      "avg_delay_min": 0,
+      "avg_headway_min": 4,
+      "avg_load_pct": 50,
+      "incident_count": 103247,
+      "validation_count": 0
+    },
+    "11": {
+      "avg_delay_min": 0,
+      "avg_headway_min": 4,
+      "avg_load_pct": 50,
+      "incident_count": 95371,
+      "validation_count": 0
+    },
+    "12": {
+      "avg_delay_min": 0,
+      "avg_headway_min": 4,
+      "avg_load_pct": 50,
+      "incident_count": 96730,
+      "validation_count": 0
+    },
+    "13": {
+      "avg_delay_min": 0,
+      "avg_headway_min": 4,
+      "avg_load_pct": 50,
+      "incident_count": 90620,
+      "validation_count": 0
+    },
+    "14": {
+      "avg_delay_min": 0,
+      "avg_headway_min": 4,
+      "avg_load_pct": 50,
+      "incident_count": 104263,
+      "validation_count": 0
+    },
+    "15": {
+      "avg_delay_min": 0,
+      "avg_headway_min": 4,
+      "avg_load_pct": 50,
+      "incident_count": 95929,
+      "validation_count": 0
+    },
+    "16": {
+      "avg_delay_min": 0,
+      "avg_headway_min": 4,
+      "avg_load_pct": 50,
+      "incident_count": 92696,
+      "validation_count": 0
+    },
+    "17": {
+      "avg_delay_min": 0,
+      "avg_headway_min": 4,
+      "avg_load_pct": 50,
+      "incident_count": 88719,
+      "validation_count": 0
+    },
+    "18": {
+      "avg_delay_min": 0,
+      "avg_headway_min": 4,
+      "avg_load_pct": 50,
+      "incident_count": 94261,
+      "validation_count": 0
+    },
+    "19": {
+      "avg_delay_min": 0,
+      "avg_headway_min": 4,
+      "avg_load_pct": 50,
+      "incident_count": 86732,
+      "validation_count": 0
+    },
+    "20": {
+      "avg_delay_min": 0,
+      "avg_headway_min": 4,
+      "avg_load_pct": 50,
+      "incident_count": 80425,
+      "validation_count": 0
+    },
+    "21": {
+      "avg_delay_min": 0,
+      "avg_headway_min": 4,
+      "avg_load_pct": 50,
+      "incident_count": 81748,
+      "validation_count": 0
+    },
+    "22": {
+      "avg_delay_min": 0,
+      "avg_headway_min": 4,
+      "avg_load_pct": 50,
+      "incident_count": 69790,
+      "validation_count": 0
+    },
+    "23": {
+      "avg_delay_min": 0,
+      "avg_headway_min": 4,
+      "avg_load_pct": 50,
+      "incident_count": 65806,
+      "validation_count": 0
+    }
+  },
+  "agias_sofias": {
+    "0": {
+      "avg_delay_min": 0,
+      "avg_headway_min": 4,
+      "avg_load_pct": 50,
+      "incident_count": 0,
+      "validation_count": 6735883
+    }
+  },
+  "venizelou": {
+    "0": {
+      "avg_delay_min": 0,
+      "avg_headway_min": 4,
+      "avg_load_pct": 50,
+      "incident_count": 0,
+      "validation_count": 5410643
+    }
+  },
+  "voulgari": {
+    "0": {
+      "avg_delay_min": 0,
+      "avg_headway_min": 4,
+      "avg_load_pct": 50,
+      "incident_count": 0,
+      "validation_count": 2604665
+    }
+  },
+  "25_martiou": {
+    "0": {
+      "avg_delay_min": 0,
+      "avg_headway_min": 4,
+      "avg_load_pct": 50,
+      "incident_count": 0,
+      "validation_count": 2949096
+    }
+  },
+  "sintrivani": {
+    "0": {
+      "avg_delay_min": 0,
+      "avg_headway_min": 4,
+      "avg_load_pct": 50,
+      "incident_count": 0,
+      "validation_count": 5055757
+    }
+  },
+  "dimokratias": {
+    "0": {
+      "avg_delay_min": 0,
+      "avg_headway_min": 4,
+      "avg_load_pct": 50,
+      "incident_count": 0,
+      "validation_count": 3672446
+    }
+  },
+  "panepistimio": {
+    "0": {
+      "avg_delay_min": 0,
+      "avg_headway_min": 4,
+      "avg_load_pct": 50,
+      "incident_count": 0,
+      "validation_count": 2463524
+    }
+  },
+  "analipsi": {
+    "0": {
+      "avg_delay_min": 0,
+      "avg_headway_min": 4,
+      "avg_load_pct": 50,
+      "incident_count": 0,
+      "validation_count": 2586892
+    }
+  },
+  "nea_elvetia": {
+    "0": {
+      "avg_delay_min": 0,
+      "avg_headway_min": 4,
+      "avg_load_pct": 50,
+      "incident_count": 0,
+      "validation_count": 3266872
+    }
+  },
+  "papafi": {
+    "0": {
+      "avg_delay_min": 0,
+      "avg_headway_min": 4,
+      "avg_load_pct": 50,
+      "incident_count": 0,
+      "validation_count": 3426946
+    }
+  },
+  "fleming": {
+    "0": {
+      "avg_delay_min": 0,
+      "avg_headway_min": 4,
+      "avg_load_pct": 50,
+      "incident_count": 0,
+      "validation_count": 2619022
+    }
+  },
+  "efkleidis": {
+    "0": {
+      "avg_delay_min": 0,
+      "avg_headway_min": 4,
+      "avg_load_pct": 50,
+      "incident_count": 0,
+      "validation_count": 2553277
+    }
+  },
+  "new_railway": {
+    "0": {
+      "avg_delay_min": 0,
+      "avg_headway_min": 4,
+      "avg_load_pct": 50,
+      "incident_count": 0,
+      "validation_count": 4448685
+    }
+  }
+}

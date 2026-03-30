@@ -1,0 +1,6 @@
+```
+data/ats_logs/
+data/tickets/
+__pycache__/
+*.pyc
+.DS_Store

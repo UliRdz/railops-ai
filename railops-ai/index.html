@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RailOps AI — Thessaloniki Metro Control</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow:wght@300;400;600;700&family=Barlow+Condensed:wght@400;700;900&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+<!-- ═══════════════════════════════ LOGIN SCREEN ═══════════════════════════════ -->
+<div id="login-screen">
+  <div class="login-bg-grid"></div>
+  <div class="login-box">
+    <div class="login-logo">
+      <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+        <rect x="4" y="20" width="40" height="8" rx="4" fill="#00e5ff" opacity="0.15"/>
+        <circle cx="12" cy="24" r="5" fill="none" stroke="#00e5ff" stroke-width="2"/>
+        <circle cx="36" cy="24" r="5" fill="none" stroke="#00e5ff" stroke-width="2"/>
+        <line x1="17" y1="24" x2="31" y2="24" stroke="#00e5ff" stroke-width="2"/>
+        <circle cx="24" cy="24" r="2" fill="#00e5ff"/>
+        <line x1="24" y1="4" x2="24" y2="14" stroke="#00e5ff" stroke-width="1.5" stroke-dasharray="3,2"/>
+        <line x1="24" y1="34" x2="24" y2="44" stroke="#00e5ff" stroke-width="1.5" stroke-dasharray="3,2"/>
+      </svg>
+      <span class="login-brand">RAILOPS <em>AI</em></span>
+    </div>
+    <p class="login-subtitle">THESSALONIKI METRO CONTROL CENTER</p>
+    <div class="login-divider"></div>
+    <input type="text" id="login-user" placeholder="Controller ID" autocomplete="off" />
+    <input type="password" id="login-pass" placeholder="Password" />
+    <button id="login-btn" onclick="doLogin()">AUTHENTICATE →</button>
+    <p class="login-hint">Demo: any credentials accepted</p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ API KEY MODAL ═══════════════════════════════ -->
+<div id="api-modal" class="modal-overlay hidden">
+  <div class="modal-box">
+    <div class="modal-header">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <path d="M10 1L12.5 7H19L14 11L16 17L10 13L4 17L6 11L1 7H7.5L10 1Z" stroke="#00e5ff" stroke-width="1.5" fill="none"/>
+      </svg>
+      <span>GROQ API KEY REQUIRED</span>
+    </div>
+    <p class="modal-desc">Your key is stored client-side only. Never transmitted to our servers.</p>
+    <input type="password" id="api-key-input" placeholder="gsk_••••••••••••••••••••••••••••••••••••••••" />
+    <label class="remember-label">
+      <input type="checkbox" id="remember-key" />
+      <span>Remember key in localStorage (this device only)</span>
+    </label>
+    <div class="modal-actions">
+      <button class="btn-secondary" onclick="skipApiKey()">Skip (demo mode)</button>
+      <button class="btn-primary" onclick="saveApiKey()">CONFIRM KEY →</button>
+    </div>
+    <a href="https://console.groq.com/keys" target="_blank" class="modal-link">↗ Get a free Groq API key</a>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ MAIN APP ═══════════════════════════════ -->
+<div id="app" class="hidden">
+
+  <!-- TOP BAR -->
+  <header class="topbar">
+    <div class="topbar-left">
+      <svg width="28" height="28" viewBox="0 0 48 48" fill="none">
+        <rect x="4" y="20" width="40" height="8" rx="4" fill="#00e5ff" opacity="0.2"/>
+        <circle cx="12" cy="24" r="5" fill="none" stroke="#00e5ff" stroke-width="2"/>
+        <circle cx="36" cy="24" r="5" fill="none" stroke="#00e5ff" stroke-width="2"/>
+        <line x1="17" y1="24" x2="31" y2="24" stroke="#00e5ff" stroke-width="2"/>
+        <circle cx="24" cy="24" r="2" fill="#00e5ff"/>
+      </svg>
+      <span class="topbar-title">RAILOPS <em>AI</em></span>
+      <span class="topbar-sub">THESSALONIKI METRO</span>
+    </div>
+    <div class="topbar-center">
+      <span class="live-indicator"><span class="pulse-dot"></span>LIVE</span>
+      <span id="clock" class="clock">--:--:--</span>
+    </div>
+    <div class="topbar-right">
+      <span id="api-status" class="status-badge status-ok">● API READY</span>
+      <span id="user-badge" class="user-badge">CTL-01</span>
+      <button class="btn-icon" onclick="showApiModal()" title="Change API Key">⚙</button>
+      <button class="btn-icon" onclick="doLogout()" title="Logout">⏻</button>
+    </div>
+  </header>
+
+  <!-- MAIN GRID -->
+  <main class="main-grid">
+
+    <!-- LEFT PANEL: Controls -->
+    <aside class="panel panel-controls">
+      <div class="panel-label">CONTROL INPUT</div>
+
+      <div class="control-group">
+        <label>STATION</label>
+        <select id="station-select">
+          <option value="">— Select Station —</option>
+        </select>
+      </div>
+
+      <div class="control-row">
+        <div class="control-group">
+          <label>DATE / TIME</label>
+          <input type="datetime-local" id="datetime-input" />
+        </div>
+      </div>
+
+      <div class="control-row">
+        <div class="control-group half">
+          <label>HEADWAY <span class="unit">min</span></label>
+          <input type="number" id="headway-input" min="1" max="20" value="4" />
+        </div>
+        <div class="control-group half">
+          <label>LOAD <span class="unit">%</span></label>
+          <input type="number" id="load-input" min="0" max="200" value="60" />
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label>OPERATIONAL CONTEXT</label>
+        <textarea id="context-input" rows="3" placeholder="E.g. Signal fault at Papafi, match at stadium, peak hour congestion..."></textarea>
+      </div>
+
+      <!-- Data file status -->
+      <div class="data-status-box">
+        <div class="data-status-row">
+          <span class="ds-label">ATS LOG DATA</span>
+          <span id="ats-status" class="ds-badge ds-missing">NOT LOADED</span>
+        </div>
+        <div class="data-status-row">
+          <span class="ds-label">TICKET DATA</span>
+          <span id="ticket-status" class="ds-badge ds-missing">NOT LOADED</span>
+        </div>
+        <button class="btn-load" onclick="document.getElementById('agg-file-input').click()">
+          ↑ LOAD aggregates.json
+        </button>
+        <input type="file" id="agg-file-input" accept=".json" style="display:none" onchange="loadAggregates(this)" />
+      </div>
+
+      <button id="predict-btn" class="btn-predict" onclick="runPrediction()">
+        <span class="btn-icon-inner">▶</span> ASK RAILOPS AI
+      </button>
+
+      <div id="loading-indicator" class="loading-bar hidden">
+        <div class="loading-fill"></div>
+        <span>Analyzing operational data…</span>
+      </div>
+    </aside>
+
+    <!-- CENTER PANEL: Cards + Trajectory -->
+    <section class="panel-center">
+
+      <!-- Cards Row -->
+      <div class="cards-row">
+
+        <!-- Prediction Card -->
+        <div class="card card-prediction" id="card-prediction">
+          <div class="card-header">
+            <span class="card-icon">⏱</span>
+            <span class="card-title">PREDICTED DELAY</span>
+          </div>
+          <div class="card-body">
+            <div class="delay-display">
+              <span id="delay-value" class="delay-num">—</span>
+              <span class="delay-unit">min</span>
+            </div>
+            <div class="risk-badge-wrap">
+              <span id="risk-badge" class="risk-badge risk-none">AWAITING DATA</span>
+            </div>
+            <p id="rationale-text" class="rationale-text">Run a prediction to see analysis.</p>
+          </div>
+        </div>
+
+        <!-- Actions Card -->
+        <div class="card card-actions" id="card-actions">
+          <div class="card-header">
+            <span class="card-icon">⚡</span>
+            <span class="card-title">RECOMMENDED ACTIONS</span>
+          </div>
+          <div class="card-body">
+            <ul id="actions-list" class="actions-list">
+              <li class="placeholder-item">No actions yet — run prediction</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Alerts Card -->
+        <div class="card card-alerts" id="card-alerts">
+          <div class="card-header">
+            <span class="card-icon">🔴</span>
+            <span class="card-title">ALERTS</span>
+            <span id="alert-count" class="alert-count">0</span>
+          </div>
+          <div class="card-body">
+            <ul id="alerts-list" class="alerts-list">
+              <li class="placeholder-item">System nominal — no active alerts</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Trajectory Panel -->
+      <div class="card card-trajectory">
+        <div class="card-header">
+          <span class="card-icon">🗺</span>
+          <span class="card-title">LINE TRAJECTORY — THESSALONIKI METRO</span>
+          <div class="traj-legend">
+            <span class="leg-item leg-normal">■ Normal</span>
+            <span class="leg-item leg-selected">■ Selected</span>
+            <span class="leg-item leg-alert">■ Alert</span>
+          </div>
+        </div>
+        <div class="trajectory-container">
+          <canvas id="traj-canvas"></canvas>
+          <div id="traj-tooltip" class="traj-tooltip hidden"></div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- RIGHT PANEL: Chat -->
+    <aside class="panel panel-chat">
+      <div class="panel-label">WHAT-IF CHAT</div>
+      <div id="chat-messages" class="chat-messages">
+        <div class="chat-msg chat-ai">
+          <span class="chat-sender">RAILOPS AI</span>
+          <p>Ready. Ask me anything about operational scenarios, delays, or what-if situations for Thessaloniki Metro.</p>
+        </div>
+      </div>
+      <div class="chat-input-row">
+        <textarea id="chat-input" placeholder="What if headway drops to 2 min at Papafi?" rows="2" onkeydown="chatKeydown(event)"></textarea>
+        <button class="btn-send" onclick="sendChat()">→</button>
+      </div>
+      <p class="chat-hint">↵ Send · Shift+↵ Newline</p>
+    </aside>
+
+  </main>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
